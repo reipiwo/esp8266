@@ -37,5 +37,5 @@ end
 
 -- Go to deep sleep and never wake up
 function goSleep()
-	dsleep(0,4)
+	node.dsleep(0,4)
 end
