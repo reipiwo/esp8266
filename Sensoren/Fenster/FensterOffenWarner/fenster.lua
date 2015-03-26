@@ -7,16 +7,6 @@ wifi.setmode(wifi.STATIONAP)
 wifi.sta.config(ssid, password)
 wifi.sta.connect()
 
--- wait until we have an IP from the AP
-tmr.alarm(0, 1000, 1, function()
-     if wifi.sta.getip() == nil then
-		-- do nothing
-     else
-          tmr.stop(0)
-		  pollPushingBox(PBdevId, goSleep)
-     end
-end)
-
 -- Poll the PushingBox API
 -- devid: Device ID given by PushingBox
 -- cb: callback function when received OK
@@ -39,3 +29,13 @@ end
 function goSleep()
 	node.dsleep(0,4)
 end
+
+-- wait until we have an IP from the AP
+tmr.alarm(0, 1000, 1, function()
+     if wifi.sta.getip() == nil then
+		-- do nothing
+     else
+          tmr.stop(0)
+		  pollPushingBox(PBdevId, goSleep)
+     end
+end)
